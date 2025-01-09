@@ -25,26 +25,22 @@ const Navbar = async () => {
                   </Link>
 
                   <form action={ async () => {
-                    "use server";
-
                     await signOut()
                   }}>
                     <button type="submit">Logout</button>
                   </form>
 
-                  <Link href={`/profile/${session?.id}`}>
+                  {/* <Link href={`/profile/${session?.id}`}>
                     <span>{session?.user?.name}</span>
-                  </Link>
+                  </Link> */}
 
                 </>
               ) : (
-                <form action={async () => {
-                   "use server";
-
-                    await signIn('github');
-                 }}>
-                   <button type="submit">Login</button>
-                 </form>
+                <form action={ async () => {
+                  await signIn()
+                }}>
+                  <button type="submit">Logout</button>
+                </form>
               )}
             </div>
 

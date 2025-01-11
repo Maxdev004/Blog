@@ -1,12 +1,13 @@
 import Image from "next/image"
 import Link from "next/link"
 import logo from "../../public/logo.png"
-import { auth } from "@/auth"
-import { signIn, signOut } from "next-auth/react"
+import { auth, signIn, signOut } from "@/auth"
+
+
 
 const Navbar = async () => {
 
-  const session = await auth();
+  const session = await auth()
 
   return (
     <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
@@ -35,11 +36,15 @@ const Navbar = async () => {
             </>
 
             ) : (
-              <>
-               <button onClick={signIn('github')}>
-                <span>Login</span>
-               </button>
-              </>
+              <form action={async () => {
+                'use server';
+
+                await signIn('github');
+               }}>
+                <button type="submit">
+                  <span>Login</span>
+                </button>
+              </form>
             )}
 
 

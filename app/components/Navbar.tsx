@@ -5,6 +5,7 @@ import { auth, signIn, signOut } from "@/auth"
 
 
 
+
 const Navbar = async () => {
 
   const session = await auth()
@@ -26,9 +27,15 @@ const Navbar = async () => {
               <span>Create</span>
             </Link>
 
-            <button onClick={signOut}>
+            <form>
+              <button onClick={async () => {
+                'use server';
+
+                await signOut({redirectTo: '/'});
+              }}>
                 <span>Logout</span>
-            </button>
+              </button>
+            </form>
 
             <Link href={`/user/${session?.id}`}>
               <span>{session?.user?.name}</span>

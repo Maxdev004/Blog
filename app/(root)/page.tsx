@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-const page = () => {
+const Home = () => {
   return (
-    <div>Home</div>
+    <div className='heading'>Home</div>
   )
 }
 
-export default page
+export default memo(Home)

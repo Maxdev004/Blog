@@ -1,5 +1,6 @@
+import SearchForm from '@/components/SearchForm'
 import React, { memo } from 'react'
-import SearchForm from '../components/SearchForm'
+
 
 const Home = async ({ searchParams } : {
   searchParams: Promise<{query?: string}>

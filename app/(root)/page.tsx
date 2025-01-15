@@ -1,4 +1,5 @@
 import SearchForm from '@/components/SearchForm'
+import StartupCard from '@/components/StartupCard';
 import React, { memo } from 'react'
 
 
@@ -6,9 +7,9 @@ const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}
 
   const posts = [
     {
-      _createdAt: "Yesterday",
+      _createdAt: new Date,
       views: "55",
-      author: {_id: 1},
+      author: {_id: 1, name: "husen"},
       _id: 1,
       description: 'This is a desxription',
       image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnewsroom.porsche.com%2Fen_US%2F2024%2Fproducts%2Fporsche-new-911-world-premiere-hybrid-36337.html&psig=AOvVaw1bUB-WSca2TaJ6vVefpgeW&ust=1737009749076000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCND267yP94oDFQAAAAAdAAAAABAE",
@@ -42,12 +43,12 @@ const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}
           {posts?.length > 0 
           ? 
           (
-            posts.map((post, index: number) => (
-              <StartupCard />
+            posts.map((post: StartupTypeCard) => (
+              <StartupCard key={post?._id} post={post} />
             ))
           )  
           :
-          ""}
+          <p className='no-results'>No startups found</p>}
         </ul>
     </section>
     </>

@@ -3,6 +3,8 @@ import StartupCard from '@/components/StartupCard';
 
 
 const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}) => {
+  
+  const query = (await searchParams).query
 
   const posts = [
     {
@@ -17,7 +19,6 @@ const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}
     },
   ];
 
-  const query = (await searchParams).query
 
   return (
     <>

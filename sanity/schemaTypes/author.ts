@@ -31,5 +31,10 @@ export const author = defineType({
             name: 'bio',
             type: 'text',
         }),
-    ]
+    ],
+    preview: {
+        select: {
+            title: 'name',
+        }
+    }
 })

@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 
 export const startup = defineType({
     name: "startup",
-    title: "Startup",
+    title: "Startups",
     type: 'document',
     fields: [
         defineField({
@@ -45,9 +45,4 @@ export const startup = defineType({
             type: 'markdown',
         }),
     ],
-    preview: {
-        select: {
-            title: 'name',
-        }
-    }
 })

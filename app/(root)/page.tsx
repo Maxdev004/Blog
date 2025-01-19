@@ -10,9 +10,6 @@ const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}
 
   const posts = await client.fetch(STARTUPS_QUERY)
 
-  console.log(posts)
-
-
   return (
     <>
     <section className='pink_container'>

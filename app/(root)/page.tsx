@@ -1,7 +1,6 @@
 import SearchForm from '@/components/SearchForm'
 import StartupCard from '@/components/StartupCard';
 import { client } from '@/sanity/lib/client';
-import { STARTUOS_QUERY } from '@/sanity/lib/queries';
 
 
 const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}) => {

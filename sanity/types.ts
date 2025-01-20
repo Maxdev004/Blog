@@ -41,6 +41,7 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
+
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
   x?: number;

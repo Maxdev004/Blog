@@ -50,6 +50,7 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
+
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;

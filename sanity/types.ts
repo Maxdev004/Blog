@@ -106,6 +106,7 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
+
 export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";
   location?: Geopoint;

@@ -59,6 +59,7 @@ export type SanityImageCrop = {
   right?: number;
 };
 
+
 export type SanityFileAsset = {
   _id: string;
   _type: "sanity.fileAsset";

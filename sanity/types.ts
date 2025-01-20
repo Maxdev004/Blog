@@ -21,6 +21,7 @@ export type SanityImagePaletteSwatch = {
   title?: string;
 };
 
+
 export type SanityImagePalette = {
   _type: "sanity.imagePalette";
   darkMuted?: SanityImagePaletteSwatch;

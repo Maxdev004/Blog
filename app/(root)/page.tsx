@@ -10,6 +10,8 @@ const Home = async ({ searchParams } : {searchParams: Promise<{query?: string}>}
 
   const { data: posts } = await sanityFetch({ query: STARTUPS_QUERY }) 
 
+  
+
   return (
     <>
     <section className='pink_container'>

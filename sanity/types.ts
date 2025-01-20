@@ -82,6 +82,7 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
+
 export type SanityImageAsset = {
   _id: string;
   _type: "sanity.imageAsset";

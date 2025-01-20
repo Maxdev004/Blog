@@ -33,6 +33,7 @@ export type SanityImagePalette = {
   muted?: SanityImagePaletteSwatch;
 };
 
+
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
   height?: number;

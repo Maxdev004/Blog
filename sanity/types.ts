@@ -147,6 +147,7 @@ export type Startup = {
   pitch?: string;
 };
 
+
 export type Slug = {
   _type: "slug";
   current?: string;

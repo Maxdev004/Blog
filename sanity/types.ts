@@ -154,6 +154,7 @@ export type Slug = {
   source?: string;
 };
 
+
 export type Author = {
   _id: string;
   _type: "author";

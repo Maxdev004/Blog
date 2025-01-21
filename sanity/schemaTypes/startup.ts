@@ -28,7 +28,7 @@ export const startup = defineType({
         }),
         defineField({
             name: 'description',
-            type: 'url',
+            type: 'text',
         }),
         defineField({
             name: 'category',

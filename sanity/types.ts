@@ -21,7 +21,6 @@ export type SanityImagePaletteSwatch = {
   title?: string;
 };
 
-
 export type SanityImagePalette = {
   _type: "sanity.imagePalette";
   darkMuted?: SanityImagePaletteSwatch;
@@ -33,14 +32,12 @@ export type SanityImagePalette = {
   muted?: SanityImagePaletteSwatch;
 };
 
-
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
   height?: number;
   width?: number;
   aspectRatio?: number;
 };
-
 
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
@@ -50,7 +47,6 @@ export type SanityImageHotspot = {
   width?: number;
 };
 
-
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -58,7 +54,6 @@ export type SanityImageCrop = {
   left?: number;
   right?: number;
 };
-
 
 export type SanityFileAsset = {
   _id: string;
@@ -82,7 +77,6 @@ export type SanityFileAsset = {
   source?: SanityAssetSourceData;
 };
 
-
 export type SanityImageAsset = {
   _id: string;
   _type: "sanity.imageAsset";
@@ -105,7 +99,6 @@ export type SanityImageAsset = {
   metadata?: SanityImageMetadata;
   source?: SanityAssetSourceData;
 };
-
 
 export type SanityImageMetadata = {
   _type: "sanity.imageMetadata";

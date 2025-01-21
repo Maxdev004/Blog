@@ -125,6 +125,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
+
 export type Startup = {
   _id: string;
   _type: "startup";

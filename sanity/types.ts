@@ -125,7 +125,6 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-
 export type Startup = {
   _id: string;
   _type: "startup";
@@ -147,13 +146,11 @@ export type Startup = {
   pitch?: string;
 };
 
-
 export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
 };
-
 
 export type Author = {
   _id: string;
@@ -168,7 +165,6 @@ export type Author = {
   image?: string;
   bio?: string;
 };
-
 
 export type Markdown = string;
 

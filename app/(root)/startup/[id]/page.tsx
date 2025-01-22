@@ -4,7 +4,6 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import React from 'react'
 
 const page = async ({ params }: {params: Promise<{ id: string }>}) => {
     const id = (await params).id
@@ -23,7 +22,7 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
     </section>
 
     <section className='section_container'>
-      <img src={post.image} alt='thumbnail' className='w-full h-auto rounded-xl'/>
+      <img src={post.image} alt='thumbnail' className='w-full h-auto rounded-3xl'/>
 
       <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
         <div className='flex-between gap-5'>
@@ -34,7 +33,9 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
               <p className='text-16-medium !text-black-300'>@{post.author.username}</p>
             </div>
           </Link>
+          <p className='category-tag'>{post.category}</p>
         </div>
+        <h3 className='text-30-bold'>Pitch Details</h3>
       </div>
     </section>
 

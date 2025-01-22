@@ -4,6 +4,7 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import markdownit from 'markdown-it'
 
 const page = async ({ params }: {params: Promise<{ id: string }>}) => {
     const id = (await params).id
@@ -11,6 +12,10 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
     const post = await client.fetch(STARTUP_BY_ID_QUERY, { id })
 
     if(!post) return notFound()
+    
+    const md = markdownit()
+    const parsedContent = md.render(post?.pitch || '')
+    
 
   return <>
 

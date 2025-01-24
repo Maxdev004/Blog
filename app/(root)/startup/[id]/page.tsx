@@ -4,8 +4,8 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import markdownit from 'markdown-it'
 
+const markdownit = require('markdown-it');
 const md = markdownit();
 
 const page = async ({ params }: {params: Promise<{ id: string }>}) => {
@@ -15,8 +15,8 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
 
     if(!post) return notFound()
 
-    const parsedContent = md.render(post?.pitch || "")
-    
+    const parsedContent = md.render(post?.pitch || '')
+
 
   return <>
 
@@ -37,7 +37,7 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
             <div>
               <p className='text-20-medium'>{post.author.name}</p>
               <p className='text-16-medium !text-black-300'>@{post.author.username}</p>
-            </div>
+            </div>  
           </Link>
           <p className='category-tag'>{post.category}</p>
         </div>
@@ -51,6 +51,10 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
           <p className='no-result'>No details provided</p>
         )}
       </div>
+
+      <hr className='divider' />
+
+      {/* TODO: EDITOR SELECTED STARTUPS */}
     </section>
 
   </>

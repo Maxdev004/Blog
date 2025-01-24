@@ -1,6 +1,11 @@
+import { client } from '@/sanity/lib/client'
 import Ping from './Ping'
+import { START_VIEWS_QUERY } from '@/sanity/lib/queries'
+import { formatNumber } from '@/app/lib/utils'
 
-const View = ({ id }: { id: number}) => {
+const View = async ({ id }: { id: number}) => {
+    const { views: totalViews } = await client.withConfig({useCdn: false}).fetch(START_VIEWS_QUERY, { id })
+
   return (
     <div className="view-container">
         <div className="absolute -top-2 -right-2">
@@ -8,7 +13,7 @@ const View = ({ id }: { id: number}) => {
         </div>
 
         <p className='view-text'>
-            <span className='font-black'>100 views</span>
+            <span className='font-black'>{formatNumber(totalViews)}</span>
         </p>
     </div>
   )

@@ -1,5 +1,6 @@
 import { formatDate } from '@/app/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
+import View from '@/components/View'
 import { client } from '@/sanity/lib/client'
 import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
@@ -58,8 +59,8 @@ const page = async ({ params }: {params: Promise<{ id: string }>}) => {
 
       {/* TODO: EDITOR SELECTED STARTUPS */}
 
-      <Suspense fallback={<Skeleton />}>
-
+      <Suspense fallback={<Skeleton className='view_skeleton'/>}>
+        <View id={id} />
       </Suspense>
     </section>
 

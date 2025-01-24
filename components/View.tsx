@@ -6,6 +6,8 @@ import { formatNumber } from '@/app/lib/utils'
 const View = async ({ id }: { id: number}) => {
     const { views: totalViews } = await client.withConfig({useCdn: false}).fetch(START_VIEWS_QUERY, { id })
 
+    //TODO: Update the number of views when user enter this page
+    
   return (
     <div className="view-container">
         <div className="absolute -top-2 -right-2">

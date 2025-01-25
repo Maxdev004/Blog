@@ -2,11 +2,12 @@ import { client } from '@/sanity/lib/client'
 import Ping from './Ping'
 import { START_VIEWS_QUERY } from '@/sanity/lib/queries'
 import { formatNumber } from '@/app/lib/utils'
+import { writeClient } from '@/sanity/lib/write-client'
 
-const View = async ({ id }: { id: number}) => {
+const View = async ({ id }: { id: string }) => {
     const { views: totalViews } = await client.withConfig({useCdn: false}).fetch(START_VIEWS_QUERY, { id })
 
-    //TODO: Update the number of views when user enter this page
+    await writeClient.patch(id).set({ views: totalViews + 1 }).commit()
     
   return (
     <div className="view-container">

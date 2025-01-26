@@ -7,6 +7,7 @@ import { Textarea } from "./ui/textarea"
 const StartupForm = () => {
 
     const [errors, setErrors] = useState<Record<string, string>>({})
+    const [pitch, setPitch] = useState("**Hello World!!!**")
 
   return (
     <form action={() => {}} className="startup-form">
@@ -57,6 +58,13 @@ const StartupForm = () => {
             />
             {errors.link && <p className="startup-form_error">{errors.link}</p>}
         </div>
+
+        <div data-color-mode="light">
+            <label className="startup-form_label" htmlFor="pitch">PITCH</label>
+            <
+            {errors.link && <p className="startup-form_error">{errors.link}</p>}
+        </div>
+
     </form>
   )
 }

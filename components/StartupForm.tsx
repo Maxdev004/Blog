@@ -7,6 +7,8 @@ import { Textarea } from "./ui/textarea"
 import dynamic from "next/dynamic"
 import { Button } from "./ui/button"
 import { Send } from "lucide-react"
+import { formSchema } from "@/app/lib/validation"
+import { z } from "zod"
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false })
 
 const StartupForm = () => {
@@ -14,7 +16,7 @@ const StartupForm = () => {
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [pitch, setPitch] = useState("")
 
-    const handleFormSubmit =\ (prevState: any, formData:FormData) => {
+    const handleFormSubmit = async (prevState: any, formData: FormData) => {
         try {
             const formValues = {
                 title: formData.get("title") as string,
@@ -26,11 +28,17 @@ const StartupForm = () => {
 
             await formSchema.parseAsync(formValues);
 
-            // const result = await createIdea(prevState,formData, pitch);
-        } catch {
+            console.log(formValues)
 
-        } finally {
+            // const result = await createIdea(prevState, formData, pitch);
+        } catch (error) {
+            if(error instanceof z.ZodError){
+                const fieldErrors = error.flatten().fieldErrors;
 
+                setErrors(fieldErrors as unknown as Record<string, string>)
+
+                return { ...prevState, error: "Invalid form data", status: "ERROR"}
+            }
         }
     }
 
@@ -40,79 +48,79 @@ const StartupForm = () => {
     })
 
 
-  return (
-    <form action={() => {}} className="startup-form">
-        <div>
-            <label className="startup-form_label" htmlFor="title">TITLE</label>
-            <Input
-            id="title"
-            name="title"
-            className="startup-form_input"
-            required
-            placeholder="Startup Title"
-            />
-            {errors.title && <p className="startup-form_error">{errors.title}</p>}
-        </div>
+    return (
+        <form action={formAction} className="startup-form">
+            <div>
+                <label className="startup-form_label" htmlFor="title">TITLE</label>
+                <Input
+                    id="title"
+                    name="title"
+                    className="startup-form_input"
+                    required
+                    placeholder="Startup Title"
+                />
+                {errors.title && <p className="startup-form_error">{errors.title}</p>}
+            </div>
 
-        <div>
-            <label className="startup-form_label" htmlFor="decription">DESCRIPTION</label>
-            <Textarea
-            id="decription"
-            name="decription"
-            className="startup-form_textarea"
-            required
-            placeholder="Startup Decription"
-            />
-            {errors.decription && <p className="startup-form_error">{errors.decription}</p>}
-        </div>
+            <div>
+                <label className="startup-form_label" htmlFor="decription">DESCRIPTION</label>
+                <Textarea
+                    id="decription"
+                    name="decription"
+                    className="startup-form_textarea"
+                    required
+                    placeholder="Startup Decription"
+                />
+                {errors.decription && <p className="startup-form_error">{errors.decription}</p>}
+            </div>
 
-        <div>
-            <label className="startup-form_label" htmlFor="category">CATEGORY</label>
-            <Input
-            id="category"
-            name="category"
-            className="startup-form_input"
-            required
-            placeholder="Startup Category (e.g. Health, Finance, etc.)"
-            />
-            {errors.category && <p className="startup-form_error">{errors.category}</p>}
-        </div>
+            <div>
+                <label className="startup-form_label" htmlFor="category">CATEGORY</label>
+                <Input
+                    id="category"
+                    name="category"
+                    className="startup-form_input"
+                    required
+                    placeholder="Startup Category (e.g. Health, Finance, etc.)"
+                />
+                {errors.category && <p className="startup-form_error">{errors.category}</p>}
+            </div>
 
-        <div>
-            <label className="startup-form_label" htmlFor="link">Image URL</label>
-            <Input
-            id="link"
-            name="link"
-            className="startup-form_input"
-            required
-            placeholder="Startup Image URL"
-            />
-            {errors.link && <p className="startup-form_error">{errors.link}</p>}
-        </div>
+            <div>
+                <label className="startup-form_label" htmlFor="link">Image URL</label>
+                <Input
+                    id="link"
+                    name="link"
+                    className="startup-form_input"
+                    required
+                    placeholder="Startup Image URL"
+                />
+                {errors.link && <p className="startup-form_error">{errors.link}</p>}
+            </div>
 
-        <div data-color-mode="light">
-            <label className="startup-form_label" htmlFor="pitch">PITCH</label>
-            <MDEditor
-                value={pitch}
-                onChange={(value) => setPitch(value as string)}
-                id="pitch"
-                preview="edit"
-                height={300}
-                style={{ borderRadius: "20px", overflow: "hidden" }}
-                textareaProps={{
-                    placeholder: "Briefly describe your startup in markdown",
-                }}
-                previewOptions={{
-                    disallowedElements: ["style"],
-                }}
-            />
-            {errors.link && <p className="startup-form_error">{errors.link}</p>}
-        </div>
+            <div data-color-mode="light">
+                <label className="startup-form_label" htmlFor="pitch">PITCH</label>
+                <MDEditor
+                    value={pitch}
+                    onChange={(value) => setPitch(value as string)}
+                    id="pitch"
+                    preview="edit"
+                    height={300}
+                    style={{ borderRadius: "20px", overflow: "hidden" }}
+                    textareaProps={{
+                        placeholder: "Briefly describe your startup in markdown",
+                    }}
+                    previewOptions={{
+                        disallowedElements: ["style"],
+                    }}
+                />
+                {errors.link && <p className="startup-form_error">{errors.link}</p>}
+            </div>
 
-        <Button type="submit" className="startup-form_btn text-white" disabled={isPending}>{isPending ? "Submitting..." : "Submit Tour Pitch"}<Send className="size-6 ml-l"/></Button>
+            <Button type="submit" className="startup-form_btn text-white" disabled={isPending}>{isPending ? "Submitting..." : "Submit Your Pitch"}<Send className="size-6 ml-l" /></Button>
 
-    </form>
-  )
+        </form>
+    )
 }
 
 export default StartupForm

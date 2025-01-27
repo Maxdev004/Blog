@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useActionState, useState } from "react"
 import { Input } from "./ui/input"
 import { Textarea } from "./ui/textarea"
 
@@ -14,7 +14,30 @@ const StartupForm = () => {
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [pitch, setPitch] = useState("")
 
-    const isPending = false
+    const handleFormSubmit =\ (prevState: any, formData:FormData) => {
+        try {
+            const formValues = {
+                title: formData.get("title") as string,
+                description: formData.get("description") as string,
+                category: formData.get("category") as string,
+                link: formData.get("link") as string,
+                pitch,
+            }
+
+            await formSchema.parseAsync(formValues);
+
+            // const result = await createIdea(prevState,formData, pitch);
+        } catch {
+
+        } finally {
+
+        }
+    }
+
+    const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+        error: "",
+        status: "INITIAL",
+    })
 
 
   return (

@@ -11,6 +11,7 @@ import { formSchema } from "@/app/lib/validation"
 import { z } from "zod"
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/router"
+import { createPitch } from "@/app/lib/actions"
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false })
 
 const StartupForm = () => {
@@ -34,18 +35,17 @@ const StartupForm = () => {
 
             await formSchema.parseAsync(formValues);
 
-            console.log(formValues)
+            const result = await createPitch(prevState, formData, pitch);
 
-            // const result = await createIdea(prevState, formData, pitch);
+            if(result.status === "SECCESS") {
+                toast({
+                    title: "Success",
+                    description: "Your pitch has been submitted",
+                })
+                router.push(`/startup/${result.id}`)
+            }
+            return result;
 
-            // if(result.status === "SECCESS") {
-            //     toast({
-            //         title: "Success",
-            //         description: "Your pitch has been submitted",
-            //     })
-            //     router.push(`/startup/${result.id}`)
-            // }
-            // return Result;
         } catch (error) {
             if(error instanceof z.ZodError){
                 const fieldErrors = error.flatten().fieldErrors;

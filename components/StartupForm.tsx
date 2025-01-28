@@ -9,12 +9,15 @@ import { Button } from "./ui/button"
 import { Send } from "lucide-react"
 import { formSchema } from "@/app/lib/validation"
 import { z } from "zod"
+import { useToast } from "@/hooks/use-toast"
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false })
 
 const StartupForm = () => {
 
     const [errors, setErrors] = useState<Record<string, string>>({})
     const [pitch, setPitch] = useState("")
+
+    const { toast } = useToast()
 
     const handleFormSubmit = async (prevState: any, formData: FormData) => {
         try {

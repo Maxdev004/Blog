@@ -8,7 +8,9 @@ export const crearePitch = async ( state: any, form: FormData, pitch: string) =>
 
     if(!session) return parseServerActionResponse({ error: "Not signed in",  status: "ERROR"})
 
-    
+    const { title, description, category, link } = Object.fromEntries(
+        Array.from(form).filter(([key]) => key !== "pitch")
+    )
 }
 
 export default crearePitch

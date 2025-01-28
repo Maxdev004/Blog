@@ -40,8 +40,25 @@ const StartupForm = () => {
 
                 setErrors(fieldErrors as unknown as Record<string, string>)
 
+                toast({
+                    title: "Error",
+                    description: "Please check your inputs and try again",
+                    variant: "destructive",
+                })
+
                 return { ...prevState, error: "Invalid form data", status: "ERROR"}
             }
+        }
+        toast({
+            title: "Error",
+            description: "Please check your inputs and try again",
+            variant: "destructive",
+        })
+
+        return {
+            ...prevState,
+            error: "An unexpected error has occurred",
+            status: "Error",
         }
     }
 

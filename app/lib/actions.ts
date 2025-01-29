@@ -1,45 +1,60 @@
-"use server"
+"use server";
 
-import { auth } from "@/auth"
-import { parseServerActionResponse } from "./utils"
-import slugify from "slugify"
-import { writeClient } from "@/sanity/lib/write-client"
+import { auth } from "@/auth";
 
-export const createPitch = async ( state: any, form: FormData, pitch: string) => {
-    const session = await auth()
+import slugify from "slugify";
+import { writeClient } from "@/sanity/lib/write-client";
+import { parseServerActionResponse } from "./utils";
 
-    if(!session) return parseServerActionResponse({ error: "Not signed in",  status: "ERROR"})
+export const createPitch = async (
+  state: any,
+  form: FormData,
+  pitch: string,
+) => {
+  const session = await auth();
 
-    const { title, description, category, link } = Object.fromEntries(
-        Array.from(form).filter(([key]) => key !== "pitch")
-    )
+  if (!session)
+    return parseServerActionResponse({
+      error: "Not signed in",
+      status: "ERROR",
+    });
 
-    const slug = slugify(title as string, { lower: true, strict: true });
+  const { title, description, category, link } = Object.fromEntries(
+    Array.from(form).filter(([key]) => key !== "pitch"),
+  );
 
-    try {
-        const startup = {
-            title,
-            description,
-            category,
-            link: link,
-            slug: {
-                _type: slug,
-                current: slug,
-            },
-            author: {
-                _type: "reference",
-                ref: session.id,
-            },
-            pitch,
-        }
+  const slug = slugify(title as string, { lower: true, strict: true });
 
-        const result = await writeClient.create({ _type: "startup", ...startup })
-        return parseServerActionResponse({ ...result, error: "", status: "SUCCESS" })
-    } catch(error) {
-        console.log(error)
+  try {
+    const startup = {
+      title,
+      description,
+      category,
+      image: link,
+      slug: {
+        _type: slug,
+        current: slug,
+      },
+      author: {
+        _type: "reference",
+        _ref: session?.id,
+      },
+      pitch,
+    };
 
-        return parseServerActionResponse({ error: JSON.stringify(error), status: "ERROR"})
-    }
-}
+    const result = await writeClient.create({ _type: "startup", ...startup });
 
-export default createPitch
+    return parseServerActionResponse({
+      ...result,
+      error: "",
+      status: "SUCCESS",
+    });
+  } catch (error) {
+    console.log(error);
+
+    return parseServerActionResponse({
+      error: JSON.stringify(error),
+      status: "ERROR",
+    });
+  }
+};

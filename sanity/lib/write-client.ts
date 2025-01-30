@@ -16,3 +16,4 @@ if(!writeClient.config().token) {
   throw new Error('Missing environment variable: SANITY_WRITE_TOKEN')
 }
 
+
